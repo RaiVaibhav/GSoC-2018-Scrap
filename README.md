@@ -14,4 +14,6 @@ Don't forgot to initially create a `virtualenv`
 
 Link to image:
 ![screenshot from 2018-08-28 03-22-42](https://user-images.githubusercontent.com/22278438/44688799-006e7500-aa73-11e8-8a59-9bfe714598f4.png)
+
+
 ![screenshot from 2018-08-28 03-23-23](https://user-images.githubusercontent.com/22278438/44688853-209e3400-aa73-11e8-8e34-160ef3597999.png)
