@@ -1,0 +1,10 @@
+<body>
+<form method="POST">
+  {% csrf_token %}
+<select name="item_id">
+{% for tag in tags %}
+    <option value="{{ tag.id }}">{{ tag.name }}</option>
+{% endfor %}
+</select>
+<input type="submit"></button>
+</form>

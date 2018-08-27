@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 
 from scrap.gsocdata import organization_data, project_data
-from scrap.models import Organization, Project
+from scrap.models import Organization, Project, Technology
 
 class Command(BaseCommand):
     help = 'Import all the org and Project data'
@@ -11,9 +11,15 @@ class Command(BaseCommand):
         # import pdb; pdb.set_trace()
         for org in organization_list:
             # import pdb; pdb.set_trace()
+            technology_object_list = []
+            for tag in org['technology_tags']:
+                technology_object, created = Technology.objects.get_or_create(
+                    name=tag)
+                technology_object_list.append(technology_object)
+
             org_object, created = Organization.objects.get_or_create(
                 org_id=org['id'], name=org['name'], precis=org['precis'],
                 image_url=org['image_url'], description=org['description'],
-                technology_tags=org['technology_tags'],
                 topic_tags=org['topic_tags'])
+            org_object.technology_tags.add(*technology_object_list)
             project_data(org['id'], org_object)

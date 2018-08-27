@@ -5,7 +5,9 @@ from scrap.models import Organization, Project
 def data(url, data_list):
     if url==None:
         return data_list
-    res = requests.get(url)
+    headers = {'Content-Type': 'application/json'}
+    res = requests.get(url, headers=headers)
+    # import pdb; pdb.set_trace()
     data_list.extend(res.json()['results'])
     url = res.json()['next']
     return data(url,data_list)

@@ -1,0 +1,17 @@
+*.pyc
+*~
+__pycache__/
+myvenv
+db.sqlite3
+/static
+.DS_Store
+.installed.cfg
+bin
+develop-eggs
+dist
+downloads
+eggs
+parts
+src/*.egg-info
+lib
+lib64
