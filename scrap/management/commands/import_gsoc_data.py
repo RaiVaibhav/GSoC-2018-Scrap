@@ -8,9 +8,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         organization_list = organization_data()
-        # import pdb; pdb.set_trace()
         for org in organization_list:
-            # import pdb; pdb.set_trace()
             technology_object_list = []
             for tag in org['technology_tags']:
                 technology_object, created = Technology.objects.get_or_create(

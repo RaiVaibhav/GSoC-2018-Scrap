@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
 from django.utils import timezone
-
+from markdown_deux import markdown
+from django.utils.safestring import mark_safe
 
 class Technology(models.Model):
     name = models.CharField(max_length=200)
@@ -21,6 +22,14 @@ class Organization(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_markdown(self):
+        description = self.description
+        return mark_safe(markdown(description))
+
+    def get_orgsite(self):
+        return ('https://summerofcode.withgoogle.com/organizations/'+str(self.org_id))
+
 
 class Project(models.Model):
     organization = models.ForeignKey('scrap.Organization', on_delete=models.CASCADE)
