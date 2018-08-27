@@ -11,3 +11,7 @@ This is a initial code it will update in future
 - Finally run `python manage.py runserver` to get the content in template
 
 Don't forgot to initially create a `virtualenv`
+
+Link to image:
+![First](https://ibb.co/kBAcdU)
+![Second](https://ibb.co/h3eQXp)
