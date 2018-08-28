@@ -7,6 +7,7 @@ This is a initial code it will update in future
 ## How to run
 
 - Create a postgres sql database.
+- Run `python manage.py makemigrations` and `python manage.py migrate`.
 - Run `python manage.py import_gsoc_data` command to populate the database.
 - Finally run `python manage.py runserver` to get the content in template
 
