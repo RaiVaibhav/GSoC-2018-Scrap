@@ -11,7 +11,7 @@ def tag_display(request):
         if request.POST.get('item_id')!='Completed Projects':
             technology_object = get_object_or_404(Technology, pk=int(request.POST.get('item_id')))
             technology_tag = technology_object.name
-            all_org = Organization.objects.filter(technology_tags=technology_object).order_by('name')
+            all_org = Organization.objects.filter(technology_tags=technology_object).annotate(num_projects=Count('project')).order_by('-num_projects','name')
     return render(request, 'scrap/base.html', {'tags':item, 'all_org': all_org,
         'group_name': request.POST.get('item_id'),
         'technology_tag': technology_tag})

@@ -25,14 +25,16 @@
   <a href= "{{ org.get_orgsite }}">
   <img src="{{ org.image_url}}" style="width:auto;height:auto;"/>
   </a>
-  {% if group_name == None or group_name == 'Completed Projects' %}
-  <p>project_completed: {{ org.num_projects }}</p>
-  {% endif %}
-  <p>org_id: {{ org.org_id }}</p>
+  <p><strong>project_completed:</strong> {{ org.num_projects }}</p>
+  <p><strong>org_id:</strong> {{ org.org_id }}</p>
   <a href= "{{ org.get_orgsite }}">org_page</a>
-  <p>org_name: {{ org.name }}</p>
-  <p>org_precis: {{ org.precis }}</p>
-  <p>org_description: {{ org.get_markdown }}</p>
+  <p><strong>org_name:</strong> {{ org.name }}</p>
+  <p><strong>Technology/Languages:</strong></p>
+  {% for tech in org.technology_tags.all %}
+    <li>{{ tech.name }}</li>
+  {% endfor %}
+  <p><strong>org_precis:</strong> {{ org.precis }}</p>
+  <p><strong>org_description:</strong> {{ org.get_markdown }}</p>
 <hr>
 {% endfor %}
 
