@@ -13,6 +13,9 @@ This is a initial code it will update in future
 
 Don't forgot to initially create a `virtualenv`
 
+## Update
+- Added the mutiple select for `Language/Technology` filter.
+
 Link to image:
 ![screenshot from 2018-08-28 03-22-42](https://user-images.githubusercontent.com/22278438/44688799-006e7500-aa73-11e8-8a59-9bfe714598f4.png)
 
