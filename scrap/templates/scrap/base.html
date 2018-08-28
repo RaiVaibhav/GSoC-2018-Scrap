@@ -1,25 +1,34 @@
 <html>
 <body>
-<h3>Filter on basis of languages/technology used</h3>
 <form method="POST">
   {% csrf_token %}
 <select name="item_id">
-{% for tag in tags %}
-    <option value="{{ tag.id }}">{{ tag.name }}</option>
-{% endfor %}
+  <option selected disabled>select Option</option>
+  <option value="Completed Projects">Completed projects</option>
+  <optgroup label="Languages/Technologies">
+  {% for tag in tags %}
+      <option value="{{ tag.id }}">{{ tag.name }}</option>
+  {% endfor %}
+</optgroup>
 </select>
 <input type="submit"></button>
 </form>
 </ br>
 <hr>
-<h3>Below filtered on basis of no. of  Completed projects</h3>
+
+{% if technology_tag == None %}
+  <h2>Filtered on basis of no. of Completed projects</h3>
+{% else %}
+  <h2>Filtered on basis of Technology/Language used: {{ technology_tag}}</h3>
+{% endif %}
 {% for org in all_org %}
   <a href= "{{ org.get_orgsite }}">
   <img src="{{ org.image_url}}" style="width:auto;height:auto;"/>
   </a>
-  <p>projec_completed: {{ org.num_projects }}</p>
+  {% if group_name == None or group_name == 'Completed Projects' %}
+  <p>project_completed: {{ org.num_projects }}</p>
+  {% endif %}
   <p>org_id: {{ org.org_id }}</p>
-  <!-- <p>org_page: {{ org.get_orgsite }} -->
   <a href= "{{ org.get_orgsite }}">org_page</a>
   <p>org_name: {{ org.name }}</p>
   <p>org_precis: {{ org.precis }}</p>
