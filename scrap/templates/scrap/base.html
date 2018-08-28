@@ -1,8 +1,18 @@
+{% load staticfiles %}
 <html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/css/bootstrap-select.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/js/bootstrap-select.min.js"></script>
+</head>
 <body>
+
 <form method="POST">
+<div class="form-group col-md-6 col-lg-6 col-sm-6">
   {% csrf_token %}
-<select name="item_id">
+<select multiple name="item_id" class="form-control selectpicker">
   <option selected disabled>select Option</option>
   <option value="Completed Projects">Completed projects</option>
   <optgroup label="Languages/Technologies">
@@ -13,15 +23,14 @@
 </select>
 <input type="submit"></button>
 </form>
-</ br>
-<hr>
-
-{% if technology_tag == None %}
+<br>
+{% if not technology_tag %}
   <h2>Filtered on basis of no. of Completed projects</h3>
 {% else %}
-  <h2>Filtered on basis of Technology/Language used: {{ technology_tag}}</h3>
+  <h2>Filtered on basis of Technology/Language used: {{ technology_tag }}</h3>
 {% endif %}
 {% for org in all_org %}
+  <br>
   <a href= "{{ org.get_orgsite }}">
   <img src="{{ org.image_url}}" style="width:auto;height:auto;"/>
   </a>
@@ -37,6 +46,6 @@
   <p><strong>org_description:</strong> {{ org.get_markdown }}</p>
 <hr>
 {% endfor %}
-
+</div>
 </body>
 </html>
