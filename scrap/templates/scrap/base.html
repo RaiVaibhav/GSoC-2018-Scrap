@@ -6,14 +6,15 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/js/bootstrap-select.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
 
 <form method="POST">
 <div class="form-group col-md-6 col-lg-5 col-sm-6">
   {% csrf_token %}
-<select multiple name="item_id" class="form-control selectpicker">
-  <option selected disabled>select Option</option>
+<select multiple name="item_id" class="form-control-6 selectpicker" data-size="10">
   <option value="Completed Projects">Completed projects</option>
   <optgroup label="Languages/Technologies">
   {% for tag in tags %}
@@ -22,22 +23,33 @@
 </optgroup>
 </select>
 <input type="submit"></button>
+</div>
 </form>
 <br>
+
+<div class="w3-container">
 {% if not technology_tag %}
-  <h2>Filtered on basis of no. of Completed projects</h3>
+  <h2><u>Filtered on basis of no. of Completed projects</u></h3>
 {% else %}
-  <h2>Filtered on basis of Technology/Language used: {{ technology_tag }}</h3>
+  <h2><u>Filtered on basis of Technology/Language used: {{ technology_tag }}</u></h3>
 {% endif %}
+
 {% for org in all_org %}
   <br>
   <a href= "{{ org.get_orgsite }}">
-  <img src="{{ org.image_url}}" style="width:auto;height:auto;"/>
+  <img src="{{ org.image_url}}" style="width:380;height:auto;"/>
   </a>
   <p><strong>project_completed:</strong> {{ org.num_projects }}</p>
   <p><strong>org_id:</strong> {{ org.org_id }}</p>
-  <a href= "{{ org.get_orgsite }}">org_page</a>
-  <p><strong>org_name:</strong> {{ org.name }}</p>
+  <!-- <a href= "{{ org.get_orgsite }}">org_page</a> -->
+  <!-- <form action="{{ org.get_orgsite }}">
+    <input type="submit" value="summerofcode org page" />
+  </form> -->
+  <p><strong>org_name:</strong>
+    <form action="{{ org.get_orgsite }}">
+      <input type="submit" value="{{ org.name }}" />
+    </form>
+  </p>
   <p><strong>Technology/Languages:</strong></p>
   {% for tech in org.technology_tags.all %}
     <li>{{ tech.name }}</li>
