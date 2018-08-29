@@ -7,7 +7,7 @@ def tag_display(request):
     item  = Technology.objects.order_by('name')
     all_org = Organization.objects.annotate(num_projects=Count('project')).order_by('-num_projects', 'name')
     technology_tags = None
-    if request.method == 'POST':
+    if request.method == 'POST' and 'item_id' in request.POST:
         if 'Completed Projects' not in request.POST.get('item_id'):
             item_id = request.POST.getlist('item_id')
             tags_id = map(int, item_id)
