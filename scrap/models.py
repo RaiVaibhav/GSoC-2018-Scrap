@@ -10,15 +10,25 @@ class Technology(models.Model):
     def __str__(self):
         return self.name
 
+class Topic(models.Model):
+    name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
+
 class Organization(models.Model):
     org_id = models.BigIntegerField(primary_key=True)
     name = models.CharField(max_length=200)
     precis = models.CharField(max_length = 200)
     image_url = models.URLField(blank=True)
+    irc_channel = models.URLField(null=True)
+    mailing_list = models.URLField(null=True)
+    ideas_list = models.URLField(blank=True)
+    blog_url= models.URLField(null=True)
+    website_url = models.URLField(blank=True)
     description = models.TextField(max_length=900, default='')
-    # technology_tags = ArrayField(models.CharField(max_length=200))
     technology_tags = models.ManyToManyField(Technology, blank = True)
-    topic_tags = ArrayField(models.CharField(max_length=200))
+    topic_tags = models.ManyToManyField(Topic, blank = True)
 
     def __str__(self):
         return self.name
@@ -38,6 +48,7 @@ class Project(models.Model):
     display_name = models.CharField(max_length=200)
     description = models.TextField(max_length=900, default='')
     assignee_display_names = ArrayField(models.CharField(max_length=200))
+    project_code_url = models.URLField(blank=True)
 
 
     def __str__(self):

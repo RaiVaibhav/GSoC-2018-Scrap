@@ -25,11 +25,10 @@ def org_project_data(org_id):
 
 def project_data(org_id, org_object):
     org_project_data_list = org_project_data(org_id)
-    # import pdb; pdb.set_trace()
     for project in org_project_data_list:
-        # import pdb; pdb.set_trace()
         project_object = Project.objects.get_or_create(organization=org_object,
             project_id=project['id'],title=project['title'],
             display_name = project['student']['display_name'],
             description = project['abstract'],
-            assignee_display_names = project['assignee_display_names'])
+            assignee_display_names = project['assignee_display_names'],
+            project_code_url = project['project_code_url'])
