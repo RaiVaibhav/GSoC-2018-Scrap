@@ -11,7 +11,17 @@ class TechnologySerializer(ModelSerializer):
         )
 
 class OrganizationSerializer(ModelSerializer):
-    technology_tags = TechnologySerializer(many=True, read_only=True)
+    # technology_tags = TechnologySerializer(many=True, read_only=True)
+    technology_tags = serializers.SlugRelatedField(
+        many=True,
+        read_only=True,
+        slug_field='name'
+     )
+    topic_tags = serializers.SlugRelatedField(
+        many=True,
+        read_only = True,
+        slug_field = 'name'
+    )
     class Meta:
         model = Organization
         fields = (
