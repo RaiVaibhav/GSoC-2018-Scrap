@@ -3,12 +3,12 @@ from rest_framework.serializers import ModelSerializer
 
 from scrap.models import Organization, Technology, Topic
 
-class TechnologySerializer(ModelSerializer):
-    class Meta:
-        model = Technology
-        fields = (
-            'name',
-        )
+# class TechnologySerializer(ModelSerializer):
+#     class Meta:
+#         model = Technology
+#         fields = (
+#             'name',
+#         )
 
 class OrganizationSerializer(ModelSerializer):
     # technology_tags = TechnologySerializer(many=True, read_only=True)
