@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
-from scrap.models import Organization, Technology, Topic
+from scrap.models import Organization, Technology, Topic, Project
 
 # class TechnologySerializer(ModelSerializer):
 #     class Meta:
@@ -9,6 +9,19 @@ from scrap.models import Organization, Technology, Topic
 #         fields = (
 #             'name',
 #         )
+
+class ProjectsSerializer(ModelSerializer):
+    class Meta:
+        model = Project
+        fields = (
+            'organization',
+            'project_id',
+            'title',
+            'display_name',
+            'description',
+            'assignee_display_names',
+            'project_code_url',
+        )
 
 class OrganizationSerializer(ModelSerializer):
     # technology_tags = TechnologySerializer(many=True, read_only=True)
@@ -22,6 +35,9 @@ class OrganizationSerializer(ModelSerializer):
         read_only = True,
         slug_field = 'name'
     )
+
+    projects_data= ProjectsSerializer(source='get_all_projects', many=True)
+
     class Meta:
         model = Organization
         fields = (
@@ -37,4 +53,5 @@ class OrganizationSerializer(ModelSerializer):
             'description',
             'technology_tags',
             'topic_tags',
+            'projects_data',
         )

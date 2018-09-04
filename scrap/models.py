@@ -30,6 +30,9 @@ class Organization(models.Model):
     technology_tags = models.ManyToManyField(Technology, blank = True)
     topic_tags = models.ManyToManyField(Topic, blank = True)
 
+    def get_all_projects(self):
+        return self.projects.all()
+
     def __str__(self):
         return self.name
 
@@ -41,8 +44,11 @@ class Organization(models.Model):
         return ('https://summerofcode.withgoogle.com/organizations/'+str(self.org_id))
 
 
+
+
+
 class Project(models.Model):
-    organization = models.ForeignKey('scrap.Organization', on_delete=models.CASCADE)
+    organization = models.ForeignKey('scrap.Organization', on_delete=models.CASCADE, related_name='projects')
     project_id = models.BigIntegerField()
     title = models.CharField(max_length = 200)
     display_name = models.CharField(max_length=200)
