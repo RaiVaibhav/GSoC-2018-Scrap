@@ -18,6 +18,9 @@ Don't forgot to initially create a `virtualenv`
 - Added the mutiple select for `Language/Technology` filter.
 - Added initial Django-rest-framework view for the json data of Projects and
   Organization.
+- If multiple `Language/Technology` selection doesn't give any organization list
+  then it will show a list of organization that contain one of the selected
+  `Language/Technology`.
 
 
 Link to image:
