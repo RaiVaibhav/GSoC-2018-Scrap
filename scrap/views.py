@@ -1,6 +1,11 @@
 from django.shortcuts import render, get_object_or_404, render_to_response
 from scrap.models import Organization, Project, Technology
 from django.db.models import Count
+from django.contrib.auth.forms import UserCreationForm
+from django.http import HttpResponse
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
+
 from django.shortcuts import redirect
 
 def tag_display(request):
@@ -24,3 +29,20 @@ def tag_display(request):
     return render(request, 'scrap/base.html', {'tags':item, 'all_org': all_org,
         'group_name': request.POST.get('item_id'),
         'technology_tag': technology_tags})
+
+def register(request):
+    if request.method =='POST':
+        form  = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/login')
+        #if request method is 'POST' means user is sending data to web server
+        #if request method is 'GET' it means the data/page from web server
+
+    else:
+        form = UserCreationForm()
+    return render(request, 'scrap/register.html', {'form': form})
+
+def logout_session(request):
+    logout(request)
+    return redirect('tag_list')

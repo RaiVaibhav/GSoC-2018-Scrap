@@ -1,0 +1,21 @@
+{% extends 'scrap/base.html' %}
+{% block title %}
+  <title>Register</title>
+{% endblock %}
+{% block page-header %}
+{% endblock %}
+{% block filter-post %}
+{% endblock %}
+{% load material_form %}
+{% block content %}
+<div class ="container-fluid">
+	<div class="col-sm-10 ">
+	<h1> Register here </h1>
+		<form method="POST">
+			{% csrf_token %}
+			{% form form=form %}{% endform %}
+			<button type="submit" name="_submit" class="btn">Submit</button>
+		</form>
+	</div>
+</div>
+{% endblock %}

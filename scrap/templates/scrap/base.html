@@ -8,13 +8,51 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/js/bootstrap-select.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  {% block title %}
+  <title>Blog</title>
+  {% endblock %}
+  {% load static %}
+  {% include 'material/includes/material_css.html' %}
+  <script src="{% static 'material/js/jquery.js' %}"></script>
+  {% include 'material/includes/material_js.html' %}
 </head>
 <body>
+  {% block page-header %}
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Scrape GSoC'18</a>
+          </div>
+      
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}
+                <li><a href="/api/login"><span class="glyphicon glyphicon-user"></span> Get Token</a></li>
+                <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-user"></span> Logout</a></li>
+                {% else %}
+                <li><a href="{% url 'register' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a href="/login?next={{request.path}}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                {% endif %}
+              </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+{% endblock %}
 
+{% block filter-post %}
 <form method="POST">
-<div class="form-group col-md-6 col-lg-5 col-sm-6">
-  {% csrf_token %}
-<select multiple name="item_id" class="form-control-6 selectpicker" data-size="10">
+  
+<div class="form-group col-md-6 col-lg-5 col-sm-6" style="margin-top: 7vw;">
+    {% csrf_token %}
+<select multiple name="item_id"data-size="10">
   <option value="Completed Projects">Completed projects</option>
   <optgroup label="Languages/Technologies">
   {% for tag in tags %}
@@ -22,10 +60,12 @@
   {% endfor %}
 </optgroup>
 </select>
-<input type="submit"></button>
+<input type="submit" value="Filter"></button>
 </div>
 </form>
+{% endblock %}
 <br>
+{% block content %}
 
 <div class="w3-container">
 {% if not technology_tag %}
@@ -59,5 +99,6 @@
 <hr>
 {% endfor %}
 </div>
+{% endblock %}
 </body>
 </html>
